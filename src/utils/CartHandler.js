@@ -15,7 +15,7 @@ export const addToCart = (prevCart, product) => {
     return [...prevCart, { ...product, quantity: 1 }]
 }
 
-//increment button
+//increment function
 export const increment = (cart, productId) => {
     return cart.map((item) =>
         item.id === productId
@@ -24,6 +24,7 @@ export const increment = (cart, productId) => {
     )
 }
 
+//decrement function
 export const decrement = (cart, productId) => {
     return cart
         .map((item) =>
@@ -34,5 +35,9 @@ export const decrement = (cart, productId) => {
         .filter((item) => item.quantity > 0)
 }
 
+// ✅ remove item from cart completely
+export const removeItem = (cart, productId) => {
+    return cart.filter((item) => item.id !== productId)
+}
 
 

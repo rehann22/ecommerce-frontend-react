@@ -1,4 +1,4 @@
-function Cart({ cart, incrementQty, decrementQty }) {
+function Cart({ cart, incrementQty, decrementQty, removeFromCart }) {
 
     return (
         <div>
@@ -9,18 +9,24 @@ function Cart({ cart, incrementQty, decrementQty }) {
             {cart.map((item) => (
                 <div key={item.id}>
                     <p>
+                        <input type="checkbox" name="" id="" />
                         {item.name} - Rp {item.price.toLocaleString("id-ID")}
+                        <span> - </span>
+                        <button onClick={() => removeFromCart(item.id)}>Hapus</button>
                     </p>
 
-                    <div>
+                    <p>
+                        <span> Qty: </span>
                         <button onClick={() => decrementQty(item.id)}>-</button>
                         <span>{item.quantity}</span>
                         <button onClick={() => incrementQty(item.id)}>+</button>
-                    </div>
-
-                    <p>Total: Rp {(item.price * item.quantity).toLocaleString("id-ID")}</p>
+                    </p>
                 </div>
             ))}
+
+            <div>
+                <h3>Total Harga: <span>Rp</span></h3>
+            </div>
 
         </div>
     )
