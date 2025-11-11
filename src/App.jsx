@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Cart from "./components/Cart";
+import Header from "./components/Header";
 import ProductList from "./components/ProductList";
 import { addToCart, increment, decrement, removeItem } from "./utils/cartHandler";
 
@@ -26,16 +28,26 @@ function App() {
     setCart((prev) => removeItem(prev, productId));
   };
 
+  const removeAllSelected = (selectedIds) => {
+    setCart(cart.filter((item) => !selectedIds.includes(item.id)));
+  };
+
   return (
-    <div>
-      <ProductList onAddToCart={handleAddToCart} />
-      <Cart
-        cart={cart}
-        incrementQty={incrementQty}
-        decrementQty={decrementQty}
-        removeFromCart={removeFromCart} />
-    </div>
-  )
+    <Router>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<ProductList onAddToCart={handleAddToCart} />} />
+
+        <Route path="/cart" element={<Cart
+          cart={cart}
+          incrementQty={incrementQty}
+          decrementQty={decrementQty}
+          removeFromCart={removeFromCart} />}
+          removeAllSelected={removeAllSelected} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App
