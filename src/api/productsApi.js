@@ -7,7 +7,9 @@ export const fetchProducts = async () => {
         return data.products.map((p) => ({
             id: p.id,
             name: p.title,
-            price: p.price
+            thumbnail: p.thumbnail,
+            price: p.price,
+            category: p.category
         }))
     } catch (error) {
         console.error("error fetch product: ", error)
