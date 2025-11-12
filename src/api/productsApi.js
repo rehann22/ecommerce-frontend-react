@@ -8,7 +8,8 @@ export const fetchProducts = async () => {
             id: p.id,
             name: p.title,
             thumbnail: p.thumbnail,
-            price: p.price
+            price: p.price,
+            category: p.category
         }))
     } catch (error) {
         console.error("error fetch product: ", error)
