@@ -5,3 +5,4 @@ export default {
     themes: ["light"],   // hanya light mode
   },
 };
+
