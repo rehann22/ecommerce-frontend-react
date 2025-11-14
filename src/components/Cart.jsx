@@ -29,7 +29,7 @@ function Cart({ cart, incrementQty, decrementQty, removeFromCart, removeAllSelec
         .reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6 w-full">
             <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
                     🛒 Keranjang Belanja

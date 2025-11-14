@@ -35,29 +35,31 @@ function App() {
   return (
 
     <Router>
-      <div>
+      <div id="parent" className="w-screen max-w-screen-xl h-screen mx-auto">
+        {/* header */}
         <Header />
+
+        <Routes>
+          {/* product list */}
+          <Route
+            path="/" element={<ProductList onAddToCart={handleAddToCart} />} />
+
+          {/* cart */}
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cart={cart}
+                incrementQty={incrementQty}
+                decrementQty={decrementQty}
+                removeFromCart={removeFromCart}
+                removeAllSelected={removeAllSelected}
+              />
+            }
+          />
+        </Routes>
+
       </div>
-      <Routes>
-
-        {/* product list */}
-        <Route
-          path="/" element={<ProductList onAddToCart={handleAddToCart} />} />
-
-        {/* cart */}
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cart={cart}
-              incrementQty={incrementQty}
-              decrementQty={decrementQty}
-              removeFromCart={removeFromCart}
-              removeAllSelected={removeAllSelected}
-            />
-          }
-        />
-      </Routes>
 
     </Router>
   );
