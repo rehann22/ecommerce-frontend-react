@@ -55,7 +55,7 @@ function ProductList({ onAddToCart }) {
                 {/* products */}
                 <div id="filter-products" className="mt-[43px]">
                     <div className="flex justify-between items-center ml-6 mb-6">
-                        <p className="text-[#3F4646] text-base font-medium">Women Clothing</p>
+                        <p className="text-[#3F4646] text-base font-medium">Women</p>
                         <div className="flex space-x-4">
                             <p className="text-[#8A33FD] text-base font-medium">New</p>
                             <p className="text-[#3F4646] text-base font-medium">Recommended</p>

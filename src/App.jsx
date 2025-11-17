@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Cart from "./components/Cart";
-import ProductList from "./components/ProductList";
+import ProductList from "./components/ProductsList";
 import Header from "./components/Header";
-import { addToCart, increment, decrement, removeItem } from "./utils/cartHandler";
+import { addToCart, increment, decrement, removeItem } from "./utils/cartHandler"
+import ProductsDetail from "./components/ProductsDetail";
 
 function App() {
 
@@ -33,32 +34,12 @@ function App() {
   };
 
   return (
-
     <Router>
       <div id="parent" className="w-screen max-w-screen-xl h-screen mx-auto">
-        {/* header */}
+
         <Header />
 
-        <Routes>
-          {/* product list */}
-          <Route
-            path="/" element={<ProductList onAddToCart={handleAddToCart} />} />
-
-          {/* cart */}
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                incrementQty={incrementQty}
-                decrementQty={decrementQty}
-                removeFromCart={removeFromCart}
-                removeAllSelected={removeAllSelected}
-              />
-            }
-          />
-        </Routes>
-
+        <ProductsDetail />
       </div>
 
     </Router>

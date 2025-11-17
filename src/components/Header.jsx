@@ -79,10 +79,18 @@ function Header() {
                         </div>
                     </div>
 
-                    <div id='frame-389' className="flex items-center justify-end gap-5">
-                        <img src={images["love.svg"]} alt="love" className="cursor-pointer hover:scale-110 transition" />
-                        <img src={images["user.svg"]} alt="user" className="cursor-pointer hover:scale-110 transition" />
-                        <img src={images["cart.svg"]} alt="cart" className="cursor-pointer hover:scale-110 transition" />
+                    <div id='frame-389' className="flex items-center justify-end gap-4">
+                        <Link>
+                            <img src={images["love.svg"]} alt="love" className="cursor-pointer hover:scale-110 transition" />
+                        </Link>
+
+                        <Link to="/cart">
+                            <img src={images["cart.svg"]} alt="user" className="cursor-pointer hover:scale-110 transition h-[44px] w-[44px]" />
+                        </Link>
+
+                        <Link>
+                            <img src={images["user.svg"]} alt="cart" className="cursor-pointer hover:scale-110 transition" />
+                        </Link>
                     </div>
                 </div>
             </div>
