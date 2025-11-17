@@ -54,12 +54,12 @@ function Cart({ cart, incrementQty, decrementQty, removeFromCart, removeAllSelec
                                             className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                                         />
                                         <img
-                                            src={item.thumbnail}
-                                            alt={item.name}
+                                            src={item.images[0]}
+                                            alt={item.title}
                                             className="w-24 h-24 object-cover rounded-lg"
                                         />
                                         <div>
-                                            <h3 className="font-medium text-gray-800">{item.name}</h3>
+                                            <h3 className="font-medium text-gray-800">{item.title}</h3>
                                             <p className="text-gray-600 text-sm">
                                                 Rp {item.price.toLocaleString("id-ID")}
                                             </p>

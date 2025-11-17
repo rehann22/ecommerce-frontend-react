@@ -1,26 +1,43 @@
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../api/productsApi";
 
-export function useProducts() {
+export function useProducts(id = null) {
     const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]); // ⬅️ tambahan
+    const [product, setProduct] = useState(null);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getData = async () => {
-            const result = await fetchProducts();
-            setProducts(result);
+            try {
+                // Jika ada ID → fetch detail produk
+                if (id) {
+                    const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
+                    const data = await res.json();
+                    setProduct(data);
+                    setLoading(false);
+                    return;
+                }
 
-            // Ambil kategori unik dari produk
-            const uniqueCategories = [...new Set(result.map((p) => p.category))];
-            setCategories(uniqueCategories);
+                // Jika tidak ada ID → fetch semua produk
+                const res = await fetch(`https://api.escuelajs.co/api/v1/products`);
+                const data = await res.json();
 
-            setLoading(false);
+                setProducts(data);
+
+                // Ambil kategori unik
+                const uniqueCategories = [...new Set(data.map((p) => p.category.name))];
+                setCategories(uniqueCategories);
+
+                setLoading(false);
+
+            } catch (error) {
+                console.error("Error fetching:", error);
+                setLoading(false);
+            }
         };
 
         getData();
-    }, []);
+    }, [id]);
 
-    // kembalikan juga categories biar bisa dipakai di komponen lain
-    return { products, categories, loading };
+    return { products, product, categories, loading };
 }

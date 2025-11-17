@@ -1,30 +1,65 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import images from "../utils/images";
-import { div } from "framer-motion/client";
+import { useProducts } from "../hooks/useProducts";
+import { motion, AnimatePresence } from "framer-motion";
 
-function ProductsDetail() {
+
+function ProductsDetail({ handleAddToCart }) {
+
+    const { id } = useParams()
+    const { product, loading } = useProducts(id)
+    const [activeImage, setActiveImage] = useState(0)
+    const [showAlert, setShowAlert] = useState(false)
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-60">
+                <span className="loading loading-spinner loading-lg text-primary"></span>
+                <p className="ml-3 text-lg">Memuat Produk...</p>
+            </div>
+        );
+    }
+
+    const handleClickAdd = () => {
+        handleAddToCart(product);
+        setShowAlert(true);
+
+        setTimeout(() => {
+            setShowAlert(false);
+        }, 1500);
+    };
+
 
     return (
         <div id="container" className="mx-16 mt-[66px]">
             <div id="grid" className="h-[700px] grid grid-cols-[12%_38%_50%]">
                 <div id="container-3-images">
-                    <div className="bg-[#F6F6F6] h-full flex items-center justify-center">
-                        <div className="grid grid-rows-[75.6px_75.6px_75.6px] gap-2">
-                            <div>
-                                <img src="#" alt="gambar 1" />
-                            </div>
-                            <div>
-                                <img src="#" alt="gambar 2" />
-                            </div>
-                            <div>
-                                <img src="#" alt="gambar 3" />
-                            </div>
+                    <div className="bg-[#F6F6F6] h-full flex items-center justify-end pr-5">
+                        <div className="grid grid-rows-[75.6px_75.6px_75.6px] gap-3">
+                            {product.images.map((img, index) => (
+                                <div
+                                    key={index}
+                                    onClick={() => setActiveImage(index)}
+                                    className={`w-[75px] h-[75px] overflow-hidden rounded-lg cursor-pointer border 
+                                    ${activeImage === index ? "border-[#8A33FD]" : "border-transparent"}`}
+                                >
+                                    <img
+                                        src={img}
+                                        alt={`images-${index}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
                 <div id="container-big-images" className="flex items-center justify-center">
-                    <img src="#" alt="big images" />
+                    <img src={product.images[activeImage]}
+                        alt={product.title}
+                        className="w-full h-full object-contains"
+                    />
                 </div>
 
                 <div id="container-description" className="flex items-center justify-start ml-8">
@@ -40,7 +75,7 @@ function ProductsDetail() {
                             </div>
 
                             <div id="name-product" className=" mt-6 w-[393px] h-[88px] text-[25px] text-[#3C4242] font-bold line-clamp-2 py-1">
-                                <div>Raven Hoodie With Black Colored Design Raven Hoodie With Black Colored Design</div>
+                                <div>{product.title}</div>
                             </div>
 
                             <div id="rating" className="mt-6 w-[359px] h-[22px] grid grid-cols-[60%_40%] gap-6">
@@ -97,13 +132,55 @@ function ProductsDetail() {
 
                             <div id="cart" className="mt-6 w-[362px] h-[46px] grid grid cols-[199px_138px]">
                                 <div className="flex items-center justify-between">
-                                    <button className="bg-[#8A33FD] text-[#FFFFFF] w-[199px] rounded-xl flex items-center justify-center gap-2 py-2">
+                                    {/* <button onClick={() => handleAddToCart(product)}
+                                        className="bg-[#8A33FD] text-[#FFFFFF] w-[199px] rounded-xl flex items-center justify-center gap-2 py-2">
                                         <img src={images["shopping-cart.svg"]} alt="shopping cart" />
                                         Add To Cart
-                                    </button>
+                                    </button> */}
+
+                                    <div className="relative">
+
+                                        {/* BUTTON */}
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            onClick={handleClickAdd}
+                                            className="bg-[#8A33FD] text-white w-[199px] rounded-xl flex items-center justify-center gap-2 py-2"
+                                        >
+                                            <img src={images["shopping-cart.svg"]} alt="shopping cart" />
+                                            Add To Cart
+                                        </motion.button>
+
+                                        {/* TOAST */}
+                                        <AnimatePresence>
+                                            {showAlert && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, x: 50, y: 20 }}
+                                                    animate={{ opacity: 1, x: 0, y: 0 }}
+                                                    exit={{ opacity: 0, x: 50, y: 20 }}
+                                                    transition={{ duration: 0.3 }}
+                                                    className="bg-[#8A33FD] text-white w-[199px] rounded-xl flex items-center justify-center gap-2 py-2"
+                                                >
+                                                    {/* Icon Check */}
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        className="w-5 h-5 text-white"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+
+                                                    Added to cart!
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
+                                    </div>
 
                                     <button className="border border-[#3C4242] text-[#3C4242] w-[138px] rounded-xl flex items-center justify-center py-2">
-                                        $63.000
+                                        ${product.price}
                                     </button>
                                 </div>
                             </div>
@@ -148,4 +225,4 @@ function ProductsDetail() {
     )
 }
 
-export default ProductsDetail
+export default ProductsDetail;

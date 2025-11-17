@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import images from "../utils/images";
 import { useEffect, useState } from "react";
+import ProductList from "./ProductsList";
 
 function Header() {
 
@@ -33,16 +34,20 @@ function Header() {
             <div id='task-bar' className='border-b border-[#BEBCBD] h-[65px] flex items-center justify-center'>
                 <div id='frame-510' className="w-[1160px] h-[45px] grid grid-cols-[95px_484px_420px_auto]">
 
-                    <div id='logo'>
-                        <img
-                            src={images["xmas-mall-logo.svg"]}
-                            alt="Logo"
-                            className="cursor-pointer"
-                        />
-                    </div>
+                    <Link to="/">
+                        <div id='logo'>
+                            <img
+                                src={images["xmas-mall-logo.svg"]}
+                                alt="Logo"
+                                className="cursor-pointer"
+                            />
+                        </div>
+                    </Link>
 
                     <div className="pl-[100px] flex items-center justify-between gap-6 px-auto text-[#807D7E] text-base font-medium">
-                        <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Shop</button>
+                        <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">
+                            <Link to="/products-list">Shop</Link>
+                        </button>
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Men</button>
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Women</button>
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Combos</button>

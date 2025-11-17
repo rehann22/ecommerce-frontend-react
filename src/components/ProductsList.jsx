@@ -1,11 +1,11 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import images from "../utils/images";
 
-function ProductList({ onAddToCart }) {
-    const { products, categories, loading } = useProducts();
-    const [clickedProduct, setClickedProduct] = useState(null);
+function ProductList() {
+    const { products, categories, loading } = useProducts()
+    const navigate = useNavigate()
 
     if (loading) {
         return (
@@ -15,14 +15,6 @@ function ProductList({ onAddToCart }) {
             </div>
         );
     }
-
-    const handleAddToCart = (product) => {
-        setClickedProduct(product.id);
-        onAddToCart(product);
-
-        // reset animasi setelah 600ms
-        setTimeout(() => setClickedProduct(null), 600);
-    };
 
     return (
         <div class="mx-16 mt-[85px]">
@@ -69,12 +61,13 @@ function ProductList({ onAddToCart }) {
                                     <div
                                         key={product.id}
                                         className="group relative flex flex-col justify-between bg-white rounded-lg shadow-sm p-1"
+                                        onClick={() => navigate(`/product/${product.id}`)}
                                     >
-                                        {/* Gambar produk */}
+                                        {/* products img */}
                                         <div className="relative flex items-center justify-center bg-white-100 rounded-md overflow-hidden">
                                             <img
-                                                alt={product.name}
-                                                src={product.thumbnail}
+                                                alt={product.title}
+                                                src={product.images}
                                                 className="max-h-full max-w-full object-cover object-center group-hover:opacity-75 transition-all"
                                             />
                                             <button className="absolute top-2 right-2 p-1 bg-white/80 backdrop-blur-sm rounded-full shadow hover:bg-white z-20">
@@ -96,54 +89,22 @@ function ProductList({ onAddToCart }) {
                                                     />
                                                 </svg>
                                             </button>
-
-                                            {/* Efek animasi "terbang ke keranjang" */}
-                                            <AnimatePresence>
-                                                {clickedProduct === product.id && (
-                                                    <motion.img
-                                                        src={product.thumbnail}
-                                                        alt=""
-                                                        initial={{ opacity: 1, scale: 1, y: 0 }}
-                                                        animate={{
-                                                            opacity: 0,
-                                                            scale: 0.3,
-                                                            y: -100,
-                                                            x: 120,
-                                                        }}
-                                                        exit={{ opacity: 0 }}
-                                                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                                                        className="absolute top-0 left-0 w-16 h-16 rounded-md pointer-events-none"
-                                                    />
-                                                )}
-                                            </AnimatePresence>
                                         </div>
 
-                                        {/* Nama dan Harga */}
-                                        <div className="mt-4 flex justify-between items-start px-1">
+                                        {/* Name & Price */}
+                                        <div className="mt-4 flex items-center justify-end">
+                                            {/* Product name */}
                                             <div className="w-[70%]">
                                                 <h3 className="text-sm text-[#3F4646] truncate">
-                                                    <span>{product.name}</span>
+                                                    {product.title}
                                                 </h3>
                                             </div>
-                                            <p className="text-sm font-medium text-gray-900">
-                                                ${product.price}
-                                            </p>
-                                        </div>
 
-                                        {/* Tombol Add To Bag */}
-                                        <motion.button
-                                            whileTap={{ scale: 0.9 }}
-                                            animate={
-                                                clickedProduct === product.id
-                                                    ? { scale: [1, 1.2, 1] }
-                                                    : {}
-                                            }
-                                            transition={{ duration: 0.4 }}
-                                            onClick={() => handleAddToCart(product)}
-                                            className="btn btn-block bg-[#8A33FD] text-white mt-4 h-9 rounded-lg hover:bg-[#6620C1] hover:shadow-lg transition-all duration-300 ease-in-out w-full"
-                                        >
-                                            {clickedProduct === product.id ? "Added!" : "Add To Bag"}
-                                        </motion.button>
+                                            {/* Price box */}
+                                            <div className="w-[82px] h-[36px] rounded-md bg-[#F6F6F6] text-[#3C4242] flex items-center justify-center font-semibold">
+                                                <p>${product.price}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
