@@ -29,7 +29,7 @@ function Cart({ cart, incrementQty, decrementQty, removeFromCart, removeAllSelec
         .reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6 w-full">
             <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
                     🛒 Keranjang Belanja
@@ -54,12 +54,12 @@ function Cart({ cart, incrementQty, decrementQty, removeFromCart, removeAllSelec
                                             className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                                         />
                                         <img
-                                            src={item.thumbnail}
-                                            alt={item.name}
+                                            src={item.images[0]}
+                                            alt={item.title}
                                             className="w-24 h-24 object-cover rounded-lg"
                                         />
                                         <div>
-                                            <h3 className="font-medium text-gray-800">{item.name}</h3>
+                                            <h3 className="font-medium text-gray-800">{item.title}</h3>
                                             <p className="text-gray-600 text-sm">
                                                 Rp {item.price.toLocaleString("id-ID")}
                                             </p>

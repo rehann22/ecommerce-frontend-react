@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Cart from "./components/Cart";
-import ProductList from "./components/ProductList";
+import ProductList from "./components/ProductsList";
 import Header from "./components/Header";
 import { addToCart, increment, decrement, removeItem } from "./utils/cartHandler";
+import HomePage from "./components/HomePage";
+import ProductsDetail from "./components/ProductsDetail";
+
 
 function App() {
 
@@ -14,6 +17,7 @@ function App() {
   const handleAddToCart = (product) => {
     setCart((prev) => addToCart(prev, product))
   };
+
 
   const incrementQty = (productId) => {
     //use functional updates to avoid stale state, always use the latest value
@@ -33,34 +37,51 @@ function App() {
   };
 
   return (
+    <div id="parent" className="w-screen max-w-screen-xl h-screen mx-auto">
+      <Router>
 
-    <Router>
-      <div>
         <Header />
-      </div>
-      <Routes>
 
-        {/* product list */}
-        <Route
-          path="/" element={<ProductList onAddToCart={handleAddToCart} />} />
+        <Routes>
 
-        {/* cart */}
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cart={cart}
-              incrementQty={incrementQty}
-              decrementQty={decrementQty}
-              removeFromCart={removeFromCart}
-              removeAllSelected={removeAllSelected}
-            />
-          }
-        />
-      </Routes>
+          {/* Homepage */}
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
 
-    </Router>
-  );
+          {/* Product Detail */}
+          <Route
+            path="/product/:id"
+            element={<ProductsDetail handleAddToCart={handleAddToCart} />}
+          />
+
+          {/* Product List */}
+          <Route
+            path="/products-list"
+            element={<ProductList />}
+          />
+
+          {/* Cart */}
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cart={cart}
+                incrementQty={incrementQty}
+                decrementQty={decrementQty}
+                removeFromCart={removeFromCart}
+                removeAllSelected={removeAllSelected}
+              />
+            }
+          />
+
+        </Routes>
+
+      </Router>
+
+    </div >
+  )
 }
 
 export default App
