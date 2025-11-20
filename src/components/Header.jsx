@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import images from "../utils/images";
 import { useEffect, useState } from "react";
-import ProductList from "./ProductsList";
 
 function Header() {
 
@@ -26,8 +25,7 @@ function Header() {
 
     return (
         <header className={`
-                fixed top-0 left-0 right-0 z-50 
-                bg-white shadow 
+                fixed top-0 left-0 right-0 z-50 bg-white
                 transition-transform duration-300
                 ${show ? "translate-y-0" : "-translate-y-full"}
             `}>
@@ -48,7 +46,7 @@ function Header() {
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">
                             <Link to="/products-list">Shop</Link>
                         </button>
-                        <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Men</button>
+                        <button className="rounded hover:text-[#8A33FD] text-base hover:scale-105  transition-all duration-300 ">Men</button>
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Women</button>
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Combos</button>
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Joggers</button>

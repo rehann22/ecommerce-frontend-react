@@ -1,19 +1,14 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import images from "../utils/images";
+import LoadingAnimated from "./Loading";
 
 function ProductList() {
     const { products, categories, loading } = useProducts()
     const navigate = useNavigate()
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-60">
-                <span className="loading loading-spinner loading-lg text-primary"></span>
-                <p className="ml-3 text-lg">Memuat Produk...</p>
-            </div>
-        );
+        return <LoadingAnimated />;
     }
 
     return (
@@ -70,7 +65,8 @@ function ProductList() {
                                                 src={product.images}
                                                 className="max-h-full max-w-full object-cover object-center group-hover:opacity-75 transition-all"
                                             />
-                                            <button className="absolute top-2 right-2 p-1 bg-white/80 backdrop-blur-sm rounded-full shadow hover:bg-white z-20">
+                                            <button onClick={(e) => e.stopPropagation()} //Stop navigate
+                                                className="absolute top-2 right-2 p-1 bg-white/80 backdrop-blur-sm rounded-full shadow hover:bg-white z-20">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="none"
