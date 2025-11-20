@@ -18,9 +18,7 @@ function App() {
     setCart((prev) => addToCart(prev, product))
   };
 
-
   const incrementQty = (productId) => {
-    //use functional updates to avoid stale state, always use the latest value
     setCart((prev) => increment(prev, productId));
   };
 

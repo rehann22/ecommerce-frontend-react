@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import images from "../utils/images";
 import { useProducts } from "../hooks/useProducts";
 import { motion, AnimatePresence } from "framer-motion";
+import LoadingAnimated from "./Loading";
 
 
 function ProductsDetail({ handleAddToCart }) {
@@ -13,12 +14,7 @@ function ProductsDetail({ handleAddToCart }) {
     const [showAlert, setShowAlert] = useState(false)
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-60">
-                <span className="loading loading-spinner loading-lg text-primary"></span>
-                <p className="ml-3 text-lg">Memuat Produk...</p>
-            </div>
-        );
+        return <LoadingAnimated />;
     }
 
     const handleClickAdd = () => {
@@ -132,17 +128,11 @@ function ProductsDetail({ handleAddToCart }) {
 
                             <div id="cart" className="mt-6 w-[362px] h-[46px] grid grid cols-[199px_138px]">
                                 <div className="flex items-center justify-between">
-                                    {/* <button onClick={() => handleAddToCart(product)}
-                                        className="bg-[#8A33FD] text-[#FFFFFF] w-[199px] rounded-xl flex items-center justify-center gap-2 py-2">
-                                        <img src={images["shopping-cart.svg"]} alt="shopping cart" />
-                                        Add To Cart
-                                    </button> */}
 
                                     <div className="relative">
 
                                         {/* BUTTON */}
                                         <motion.button
-                                            whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.9 }}
                                             onClick={handleClickAdd}
                                             className="bg-[#8A33FD] text-white w-[199px] rounded-xl flex items-center justify-center gap-2 py-2"
@@ -159,7 +149,9 @@ function ProductsDetail({ handleAddToCart }) {
                                                     animate={{ opacity: 1, x: 0, y: 0 }}
                                                     exit={{ opacity: 0, x: 50, y: 20 }}
                                                     transition={{ duration: 0.3 }}
-                                                    className="bg-[#8A33FD] text-white w-[199px] rounded-xl flex items-center justify-center gap-2 py-2"
+                                                    className="fixed top-6 left-1/2 -translate-x-1/2 
+                                                               bg-[#8A33FD] text-white px-4 py-2 rounded-lg shadow-xl 
+                                                               flex items-center gap-2 z-50"
                                                 >
                                                     {/* Icon Check */}
                                                     <svg
@@ -178,10 +170,13 @@ function ProductsDetail({ handleAddToCart }) {
                                         </AnimatePresence>
 
                                     </div>
-
-                                    <button className="border border-[#3C4242] text-[#3C4242] w-[138px] rounded-xl flex items-center justify-center py-2">
+                                    <motion.button
+                                        whileTap={{ scale: 0.9 }}
+                                        onClick={""}
+                                        className="border border-[#3C4242] text-[#3C4242] w-[138px] rounded-xl flex items-center justify-center py-2"
+                                    >
                                         ${product.price}
-                                    </button>
+                                    </motion.button>
                                 </div>
                             </div>
 
