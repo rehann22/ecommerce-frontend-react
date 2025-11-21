@@ -46,10 +46,10 @@ function Header() {
                         <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">
                             <Link to="/products-list">Shop</Link>
                         </button>
-                        <button className="rounded hover:text-[#8A33FD] text-base hover:scale-105  transition-all duration-300 ">Men</button>
-                        <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Women</button>
-                        <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Combos</button>
-                        <button className="rounded hover:text-[#8A33FD] hover:scale-105  transition-all duration-300 ">Joggers</button>
+                        <button>Men</button>
+                        <button>Women</button>
+                        <button>Combos</button>
+                        <button>Joggers</button>
                     </div>
 
                     <div id='search' className="flex items-center justify-center ">

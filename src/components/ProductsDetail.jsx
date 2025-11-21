@@ -28,10 +28,10 @@ function ProductsDetail({ handleAddToCart }) {
 
 
     return (
-        <div id="container" className="mx-16 mt-[66px]">
-            <div id="grid" className="h-[700px] grid grid-cols-[12%_38%_50%]">
+        <div id="content" className="mx-16 mt-[64px]">
+            <div id="grid" className="grid grid-cols-[12%_38%_50%]">
                 <div id="container-3-images">
-                    <div className="bg-[#F6F6F6] h-full flex items-center justify-end pr-5">
+                    <div className="bg-[#F6F6F6] h-[530px] flex items-center justify-end pr-5">
                         <div className="grid grid-rows-[75.6px_75.6px_75.6px] gap-3">
                             {product.images.map((img, index) => (
                                 <div
@@ -51,18 +51,17 @@ function ProductsDetail({ handleAddToCart }) {
                     </div>
                 </div>
 
-                <div id="container-big-images" className="flex items-center justify-center">
+                <div id="container-big-images" className="flex items-center justify-center h-[530px]">
                     <img src={product.images[activeImage]}
                         alt={product.title}
-                        className="w-full h-full object-contains"
+                        className="h-full object-contains"
                     />
                 </div>
 
                 <div id="container-description" className="flex items-center justify-start ml-8">
-                    <div className="grid grid-rows-[75%_25%] h-full w-full">
-                        <div className="border-b border-[#BEBCBD]">
-
-                            <div id="filter-result" className="w-[203px] h-[22px] flex items-center justify-start gap-2 text-sm mt-6 text-[#807D7E] text-base font-sm">
+                    <div className="grid grid-rows-[auto_auto_auto]">
+                        <div>
+                            <div id="filter-result" className="w-[203px] h-[22px] flex items-center justify-start gap-2 text-sm mt-1 text-[#807D7E] text-base font-sm">
                                 <div>Shop</div>
                                 <img src={images["left.svg"]} alt="img left" />
                                 <div>Women</div>
@@ -70,11 +69,11 @@ function ProductsDetail({ handleAddToCart }) {
                                 <div>Top</div>
                             </div>
 
-                            <div id="name-product" className=" mt-6 w-[393px] h-[88px] text-[25px] text-[#3C4242] font-bold line-clamp-2 py-1">
+                            <div id="name-product" className=" mt-2 w-[500px] text-[25px] text-[#3C4242] font-bold line-clamp-1">
                                 <div>{product.title}</div>
                             </div>
 
-                            <div id="rating" className="mt-6 w-[359px] h-[22px] grid grid-cols-[60%_40%] gap-6">
+                            <div id="rating" className="mt-2 w-[359px] h-[22px] grid grid-cols-[60%_40%] gap-6">
                                 <div className="w-22 h-22 flex items-center justify-between text-[#807D7E] text-sm">
                                     <img src={images["star.svg"]} alt="star" />
                                     <img src={images["star.svg"]} alt="star" />
@@ -84,13 +83,13 @@ function ProductsDetail({ handleAddToCart }) {
                                     <p>3.5</p>
                                 </div>
 
-                                <div className="flex items-center justify-start gap-2 text-[#807D7E] text-sm">
+                                <div className="flex items-center justify-start gap-2 text-[#807D7E] text-sm mt-2">
                                     <img src={images["message.svg"]} alt="comments" />
                                     <p>120 Comments</p>
                                 </div>
                             </div>
 
-                            <div id="size" className="mt-6 w-[290px] h-[80px] grid grid-rows-[22px_42px] gap-3">
+                            <div id="size" className="mt-4 w-[290px] h-[80px] grid grid-rows-[22px_42px] gap-3">
                                 <div className="flex items-center justify-start gap-4 text-sm">
                                     <p className="text-[#3F4646] font-bold">Select Size</p>
                                     <p className="text-[#807D7E]">Size Guide</p>
@@ -99,7 +98,7 @@ function ProductsDetail({ handleAddToCart }) {
 
                                 <div className="flex items-center justify-between rounded">
                                     {["XS", "S", "M", "L", "XL"].map((size) => (
-                                        <div className="h-[42px] w-[42px] flex items-center justify-center text-sm">
+                                        <div className="h-[42px] w-[42px] flex items-center justify-center text-sm text-[#3F4646]">
                                             <button
                                                 key={size}
                                                 className="border-2 border-[#BEBCBD] rounded-xl hover:bg-[#3C4242] hover:text-white w-[38px] h-[38px]"
@@ -112,7 +111,7 @@ function ProductsDetail({ handleAddToCart }) {
 
                             </div>
 
-                            <div id="color" className="mt-6 w-[156px] h-[77px] grid grid-rows-[22px_22px] gap-5">
+                            <div id="color" className="mt-4 w-[156px] h-[77px] grid grid-rows-[22px_22px] gap-5">
                                 <p className="text-[#3F4646] text-sm font-bold">
                                     Colours Available
                                 </p>
@@ -126,7 +125,7 @@ function ProductsDetail({ handleAddToCart }) {
 
                             </div>
 
-                            <div id="cart" className="mt-6 w-[362px] h-[46px] grid grid cols-[199px_138px]">
+                            <div id="cart" className="mt-4 w-[362px] h-[46px] grid grid cols-[199px_138px]">
                                 <div className="flex items-center justify-between">
 
                                     <div className="relative">
@@ -182,31 +181,35 @@ function ProductsDetail({ handleAddToCart }) {
 
                         </div>
 
-                        <div id="corner-right" className="mt-6">
-                            <div className="grid grid-cols-2 grid-rows-2 gap-2 text-[#3C4242] text-sm font-semibold">
-                                <div className="w-[219px] h-[50px] flex items-center gap-4">
-                                    <div className="w-[44px] h-[44px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
+                        <div className="border-t border-[#BEBCBD] my-6">
+
+                        </div>
+
+                        <div id="corner-right" className="flex items-center">
+                            <div className="grid grid-cols-2 grid-rows-2 gap-5 text-[#3C4242] text-sm font-semibold">
+                                <div className="w-[219px] h-[30px] flex items-center gap-4">
+                                    <div className="w-[40px] h-[40px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
                                         <img src={images["credit-card.svg"]} alt="secure" className="w-6 h-6" />
                                     </div>
                                     Secure payment
                                 </div>
 
-                                <div className="w-[219px] h-[50px] flex items-center gap-4">
-                                    <div className="w-[44px] h-[44px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
+                                <div className="w-[219px] h-[30px] flex items-center gap-4">
+                                    <div className="w-[40px] h-[40px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
                                         <img src={images["size-fit.svg"]} alt="size" className="w-6 h-6" />
                                     </div>
                                     Size & Fit
                                 </div>
 
-                                <div className="w-[219px] h-[50px] flex items-center gap-4">
-                                    <div className="w-[44px] h-[44px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
+                                <div className="w-[219px] h-[30px] flex items-center gap-4">
+                                    <div className="w-[40px] h-[40px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
                                         <img src={images["truck.svg"]} alt="shipping" className="w-6 h-6" />
                                     </div>
                                     Free Shipping
                                 </div>
 
-                                <div className="w-[219px] h-[50px] flex items-center gap-4">
-                                    <div className="w-[44px] h-[44px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
+                                <div className="w-[219px] h-[30px] flex items-center gap-4">
+                                    <div className="w-[40px] h-[40px] bg-[#F6F6F6] rounded-full flex items-center justify-center">
                                         <img src={images["returns.svg"]} alt="return" className="w-6 h-6" />
                                     </div>
                                     Free Shipping & Returns

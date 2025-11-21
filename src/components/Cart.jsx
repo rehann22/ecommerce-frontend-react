@@ -36,7 +36,7 @@ function Cart({ cart, incrementQty, decrementQty, removeFromCart, removeAllSelec
         .reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
-        <div id="container" className="grid grid-rows-[91px_auto_367px] mt-[100px]">
+        <div id="container-cart" className="grid grid-rows-[91px_auto_320px] mt-[100px]">
 
             <div className="mx-16 flex items-center justify-start">
                 <div className="h-[91px] w-[482px]">
@@ -197,10 +197,6 @@ function Cart({ cart, incrementQty, decrementQty, removeFromCart, removeAllSelec
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className="border-2 mx-1 mt-[40px]">
-                p
             </div>
         </div>
     );

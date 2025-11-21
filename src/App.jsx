@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
 import ProductList from "./components/ProductsList";
-import Header from "./components/Header";
 import { addToCart, increment, decrement, removeItem } from "./utils/cartHandler";
 import HomePage from "./components/HomePage";
 import ProductsDetail from "./components/ProductsDetail";
-
+import Layout from "./components/Layout";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
 
@@ -35,32 +35,20 @@ function App() {
   };
 
   return (
-    <div id="parent" className="w-screen max-w-screen-xl h-screen mx-auto">
-      <Router>
-
-        <Header />
-
+    <Router>
+      <ScrollToTop />
+      <Layout>
         <Routes>
 
-          {/* Homepage */}
-          <Route
-            path="/"
-            element={<HomePage />}
-          />
+          <Route path="/" element={<HomePage />} />
 
-          {/* Product Detail */}
           <Route
             path="/product/:id"
             element={<ProductsDetail handleAddToCart={handleAddToCart} />}
           />
 
-          {/* Product List */}
-          <Route
-            path="/products-list"
-            element={<ProductList />}
-          />
+          <Route path="/products-list" element={<ProductList />} />
 
-          {/* Cart */}
           <Route
             path="/cart"
             element={
@@ -75,11 +63,9 @@ function App() {
           />
 
         </Routes>
-
-      </Router>
-
-    </div >
-  )
+      </Layout>
+    </Router>
+  );
 }
 
 export default App
